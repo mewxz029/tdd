@@ -12,6 +12,8 @@
 
 "this why we need to have unit test to tell us something is wrong."
 
+![Why do we need unit test ?](https://github.com/mewxz029/tdd/blob/main/images/why_do_we_need_unit_test.png)
+
 ### The Propose of Unit Tests
 > "The main purpose of unit test is not to ~verify your code~"
 > "It's to make **refactorable** without impacting the **business function**"
@@ -42,6 +44,8 @@ Step 2: I Write my Answer (The Code)
 4. Refactor Security issue on pdf.js (06/2024)
 
 > "We can change the code but the function stays the same and we still have a good unit test."
+
+![How TDD Helps us to refactor ?](https://github.com/mewxz029/tdd/blob/main/images/how_tdd_helps_us_to_refactor.png)
 
 ### How to start ?
 1. Stop using Jest
