@@ -55,7 +55,7 @@ we can change to (from node 18)
 
 ```bash
 
-note --test
+node --test
 ```
 
 if we want you `--watch`
