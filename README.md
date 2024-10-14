@@ -2,7 +2,7 @@
 ## source from
 - [The Future of Test Driven Development by Olivier Rodomond](https://www.youtube.com/watch?v=gtB7nzeKT-8)
 
-### Why do we need unit test ?
+## Why do we need unit test ?
 1. write the code
 2. write the unit to verify
 3. everything is ok. party! we can go home.
@@ -14,11 +14,11 @@
 
 ![Why do we need unit test ?](https://github.com/mewxz029/tdd/blob/main/images/why_do_we_need_unit_test.png)
 
-### The Propose of Unit Tests
+## The Propose of Unit Tests
 > "The main purpose of unit test is not to ~verify your code~"
 > "It's to make **refactorable** without impacting the **business function**"
 
-### Refactoring
+## Refactoring
 - Library change
 - Language change
 - Data change
@@ -30,7 +30,7 @@ and now we have AI generated code.
 
 the day we use it until today it can be a lot and a lot of changes.
 
-### How TDD helps us to refactor ?
+## How TDD helps us to refactor ?
 Step 1: I Write my Question for the code (The Unit Test)
 1. Base on the Business requirement
 2. Easy to understand
@@ -47,8 +47,8 @@ Step 2: I Write my Answer (The Code)
 
 ![How TDD Helps us to refactor ?](https://github.com/mewxz029/tdd/blob/main/images/how_tdd_helps_us_to_refactor.png)
 
-### How to start ?
-1. Stop using Jest
+## How to start ?
+### 1. Stop using Jest
 Jest is good for frontend mostly (it have a lot more unnecessary dependencies)
 
 ```bash
