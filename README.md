@@ -1,4 +1,5 @@
 # Test Driven Development
+just my personal note.
 ## source from
 - [The Future of Test Driven Development by Olivier Rodomond](https://www.youtube.com/watch?v=gtB7nzeKT-8)
 - [Creatorsgarten](https://creatorsgarten.org/videos/bkkjs21/tdd)
