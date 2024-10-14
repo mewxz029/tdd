@@ -46,13 +46,19 @@ Step 2: I Write my Answer (The Code)
 ### How to start ?
 1. Stop using Jest
 Jest is good for frontend mostly (it have a lot more unnecessary dependencies)
+
 ```jest```
+
 we can change to (from node 18)
+
 ```note --test```
 
 if we want you `--watch`
-```jest --watch````
+
+```jest --watch```
+
 you can use
+
 ```node --test --watch```
 
 Now you can simply use the packages `node:test` and `node:assert` in your tests
