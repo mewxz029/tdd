@@ -212,3 +212,18 @@ export async function getCars(collectionName) {
     return await Car.find({}).exec() // Get all documents the MongoDB collection Car
 }
 ```
+
+### What about AI?
+AI can generate code but most of the engineer use it the wrong way!
+
+ChatGPT is the best partner for Test Driven Development!
+
+Since The test is the ***question***, Then the test should be the ***prompt***
+
+### Conclusion
+- Unit Test allows safe refactoring
+- Mock are the enemy of refactoring
+- Intercept instead of mocking
+- Use AI like a pro
+- Open source is the best way to practice TDD
+- test driven development will get you a job easily
