@@ -144,6 +144,7 @@ Stop ~mocking~ mongo, just run it in ***docker***
 import { MongoDBContainer } from '@testcontainers/mongodb'
 ```
 [Testcontainers](https://testcontainers.com/) is using docker to start and kill a container just for testing purposes
+
 ![Testcontainers Workflow](https://github.com/mewxz029/tdd/blob/main/images/testcontainers_test_workflow.png)
 
 ### How to use TestContainer?
@@ -174,6 +175,7 @@ test('Search for car info', async (e) => {
 
 Time to answer
 > Let's try to answer with mongodb client or mongoose
+
 **mongodb**
 ```js
 import { MongoClient } from 'mongodb'
