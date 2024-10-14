@@ -1,6 +1,7 @@
 # Test Driven Development
 ## source from
 - [The Future of Test Driven Development by Olivier Rodomond](https://www.youtube.com/watch?v=gtB7nzeKT-8)
+- [Creatorsgarten](https://creatorsgarten.org/videos/bkkjs21/tdd)
 
 ## Why do we need unit test ?
 1. write the code
@@ -48,7 +49,7 @@ Step 2: I Write my Answer (The Code)
 ![How TDD Helps us to refactor ?](https://github.com/mewxz029/tdd/blob/main/images/how_tdd_helps_us_to_refactor.png)
 
 ## How to start ?
-### 1. Stop using Jest
+### Stop using Jest
 Jest is good for frontend mostly (it have a lot more unnecessary dependencies)
 
 ```bash
@@ -79,11 +80,133 @@ node --test --watch
 Now you can simply use the packages `node:test` and `node:assert` in your tests
 ```js
 import { cacl } from '../index.js'
-import { test } from 'node:test'
+import instance from 'module'
+import { test, mock } from 'node:test'
 import assert from 'node:assert'
 
 test('add calculation', () => {
+    // mock.instance.calculate
+    mock.method(instance, 'calculate', () => 10)
     const result = calc(5, 5)
     assert.equal(result, 10)
 })
+```
+
+### His TDD Setup (VIM + TMUX)
+![His TDD Setup (VIM + TMUX)](https://github.com/mewxz029/tdd/blob/main/images/his_tdd_setup.png)
+
+### 3. How to Mock API in 2024?
+Stop using axios and start using [Undici](https://github.com/nodejs/undici)
+```js
+import axios from 'axios';
+```
+Undici is the top 1 HTTP client built by Core NodeJs Team
+```js
+import { request } from 'undici';
+```
+
+Let's have a small example to get data from Github
+```js
+import { request } from 'undici'
+
+async function retrieveGithubProfile(name) {
+    const url = 'https://api.github.com/' + name
+    const { body } = await request(url)
+    return body.json()
+}
+```
+
+We don't mock the Library we ***intercept*** the API request
+```js
+import { MockAgent, setGlobalDispatcher } from 'undici'
+import { test } from 'node:test'
+import { retrieveGithubProfile } from '../index.js'
+import assert from 'node:assert'
+
+const mockAgent = new MockAgent()
+setGlobalDispatcher(mockAgent)
+
+test('Retrieve github info', async () => {
+    mockAgent
+     .get('https://api.github.com')
+     .intercept({ method: 'GET', path: '/mewxz029' })
+     .reply(200, { foo: 'bar' })
+    const result = await retrieveGithubProfile('mewxz029')
+    assert.deepEqual(result, { foo: 'bar' })
+})
+```
+The Undici interceptor can catch any request made by majorities of the HTTP client(axios, got, etc...)
+
+
+### How to Mock MongoDB in 2024?
+Stop ~mocking~ mongo, just run it in ***docker***
+```js
+import { MongoDBContainer } from '@testcontainers/mongodb'
+```
+[Testcontainers](https://testcontainers.com/) is using docker to start and kill a container just for testing purposes
+![Testcontainers Workflow](https://github.com/mewxz029/tdd/blob/main/images/testcontainers_test_workflow.png)
+
+### How to use TestContainer?
+Let's get our question
+> To prepare the test we insert fake data in the db
+```js
+import { MongoDBContainer } from '@testcontainers/mongodb'
+import { getDB, getCars } from '../index.js'
+
+let container, db, config
+
+before(async () => {
+    container = await new MongoDBContainer().start()
+    config = {
+        host: container.getHost(),
+        port: container.getMappedPort(27017)
+    }
+    db = (await getDB(config))
+})
+
+test('Search for car info', async (e) => {
+    await db.collection('cars1').insertMany({ foo: 'bar1' })
+    const result = await getCars('cars1')
+    assert.equal(result.length, 1)
+    assert.deepEqual('bar1', result[0].foo)
+})
+```
+
+Time to answer
+> Let's try to answer with mongodb client or mongoose
+**mongodb**
+```js
+import { MongoClient } from 'mongodb'
+
+// function to connect to MongoDB
+export async function getDB(config) {
+    // ...
+}
+
+// function to retrieve car information from a collection
+export async function getCars(collectionName, c) {
+    const db = await getDB(c)
+    const collection = db.collection(collectionName)
+    return await collection.find({}).toArray() // Get all document
+}
+```
+**mongoose**
+```js
+import mongoose from 'mongoose'
+
+// function to connect to MongoDB using Mongoose
+export async function getDB(config) {
+    // ...
+}
+
+const carSchema = new mongoose.Schema({
+    foo: String
+})
+
+const Car = mongoose.model('Car', carSchema)
+
+// function to retrieve car information from a collection
+export async function getCars(collectionName) {
+    return await Car.find({}).exec() // Get all documents the MongoDB collection Car
+}
 ```
