@@ -95,7 +95,7 @@ test('add calculation', () => {
 ### His TDD Setup (VIM + TMUX)
 ![His TDD Setup (VIM + TMUX)](https://github.com/mewxz029/tdd/blob/main/images/his_tdd_setup.png)
 
-### 3. How to Mock API in 2024?
+### How to Mock API in 2024?
 Stop using axios and start using [Undici](https://github.com/nodejs/undici)
 ```js
 import axios from 'axios';
